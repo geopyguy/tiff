@@ -10,4 +10,9 @@ H = Header()
 H.get(f)
 print H.__dict__
 
+foo = IFD(f)
+foo.get()
+
+
+print foo.__dict__
 f.close()
