@@ -64,6 +64,7 @@ class IFD(object):
         self.tileLength = tuple()
         self.tileOffsets = tuple()
         self.tileBytes = tuple()
+        self.modelTiepoint = tuple()
         self.geoKey = tuple()
         self.header = tuple()
         
@@ -102,10 +103,13 @@ class IFD(object):
                 self.tileOffsets = data
             elif tag == 325: #Tile Bytes
                 self.tileBytes = data
+            elif tag == 33922: #Model Tie Point
+                self.modelTiepoint = data
             elif tag == 34735: #GEOKEY Header
                 self.geoKey = data
             elif tag == 34737: #NGA Header
                 self.header = data
+            
         
         self.f.seek(__cur)
     
