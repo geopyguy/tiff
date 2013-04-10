@@ -28,10 +28,10 @@ class Header(object):
         self.__curPostion = self.f.tell()
         
         self.f.seek(0)
-        __endian = self.read(2).upper()
+        __endian = self.f.read(2).upper()
         if __endian == 'II':
             self.symbol = '<'
-        elif __endian = 'MM':
+        elif __endian == 'MM':
             self.symbol = '>'
         
         if struct.unpack(self.symbol+'h', self.f.read(2))[0] != 42:
