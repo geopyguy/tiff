@@ -6,6 +6,7 @@ import sys
 import binascii
 import struct
 from array import array
+import numpy
 
 class _Header(object):
     ''' '''
@@ -126,7 +127,7 @@ def gettileoffsets(f, obj):
     f.seek(cur)
     return offsets.tolist()
     
-def gettile(f,length,width,offset):
+def gettile(f,tileLength, tileWidth, offset):
     '''
     returns a 2d array of int values representing a tile
     '''
@@ -134,10 +135,10 @@ def gettile(f,length,width,offset):
     f.seek(offset)
     scanline = 0
     tile = []
-    while scanline < length:
+    while scanline < tileLength:
         data = array('h')
         #read to the right
-        data.read(f, width)
+        data.read(f, tileWidth)
         tile.append(data)
         scanline += 1
     f.seek(cur)
@@ -167,4 +168,10 @@ def rightzeroindex(_list):
         else:
             index -= 1
 
+def maketilearray(tilesPerImage,tilesDown,tilesAcross):
+    '''
+    create a 2d array representing the tiles
+    returns a numpy array
+    '''
+    return numpy.arange(tilesPerImage).reshape(tilesDown, tilesAcross)
         
