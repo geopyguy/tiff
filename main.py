@@ -6,11 +6,9 @@ from tiff_tools import IFD
 
 #image = '/media/rich/OS/workspace/tiff/UTM2GTIF.TIF'
 #image = '/media/rich/OS/workspace/tiff/cea.tif'
-<<<<<<< HEAD
-image = r'/home/rich/Documents/tiff/test.tif'
-=======
-image = r'C:\workspace\tiff\test2.tif'
->>>>>>> 7058ac9592bf27191a8264c88f00c6e759161fe3
+
+image = r'/home/rich/Documents/tiff/test2.tif'
+
 print os.path.exists(image)
 f = open(image,'rb')
 
@@ -27,7 +25,7 @@ print foo.tilesPerImage
 
 tileOffsets = tiff_tools.gettileoffsets(f, foo.tileOffsets)
 print len(tileOffsets), tileOffsets
-<<<<<<< HEAD
+
 tileArray = tiff_tools.maketilearray(foo.tilesPerImage,foo.tilesDown, foo.tilesAcross)
 print tileArray
 
@@ -101,9 +99,6 @@ while row < foo.tilesDown:
             print 'x,y',(x,y),'x_,y_',(x_,y_)
         scanlineCounter += 1
     row += 1
-    
-=======
->>>>>>> 7058ac9592bf27191a8264c88f00c6e759161fe3
 
 f.read()
 f.tell()
