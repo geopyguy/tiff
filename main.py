@@ -6,7 +6,7 @@ from tiff_tools import IFD
 
 #image = '/media/rich/OS/workspace/tiff/UTM2GTIF.TIF'
 #image = '/media/rich/OS/workspace/tiff/cea.tif'
-image = r'C:\workspace\tiff\test.tif'
+image = r'C:\workspace\tiff\test2.tif'
 print os.path.exists(image)
 f = open(image,'rb')
 
@@ -25,7 +25,11 @@ print foo.tilesAcross
 print foo.tilesDown
 print foo.tilesPerImage
 
+tileOffsets = tiff_tools.gettileoffsets(f, foo.tileOffsets)
+print len(tileOffsets), tileOffsets
 
+f.read()
+f.tell()
 #print foo.__dict__
 
 #print 'here'
