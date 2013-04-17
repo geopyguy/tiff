@@ -7,7 +7,7 @@ from tiff_tools import IFD
 #image = '/media/rich/OS/workspace/tiff/UTM2GTIF.TIF'
 #image = '/media/rich/OS/workspace/tiff/cea.tif'
 
-image = r'/home/rich/Documents/tiff/test2.tif'
+image = r'/home/rich/Dropbox/test2.tif'
 
 print os.path.exists(image)
 f = open(image,'rb')
