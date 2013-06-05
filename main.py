@@ -1,13 +1,15 @@
 import os
+import time
+import numpy as np
+import arcgisscripting
+gp = arcgisscripting.create()
 import struct
 import tiff_tools
 from tiff_tools import IFD
 
 
-#image = '/media/rich/OS/workspace/tiff/UTM2GTIF.TIF'
-#image = '/media/rich/OS/workspace/tiff/cea.tif'
 
-image = r'/home/rich/Dropbox/test2.tif'
+image = r'C:\workspace\tiff\test2.tif'
 
 print os.path.exists(image)
 f = open(image,'rb')
