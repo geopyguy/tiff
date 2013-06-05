@@ -111,8 +111,8 @@ class IFD(object):
             elif tag == 34737: #NGA Header
                 self.header = data
         
-        self.tilesAcross = (self.imageWidth[3] + self.tileWidth[3] - 1) / self.tileWidth[3]
-        self.tilesDown = (self.imageLength[3] + self.tileLength[3] -1) / self.tileLength[3]
+        self.tilesAcross = (self.imageWidth[3] + self.Width[3] - 1) / self.Width[3]
+        self.tilesDown = (self.imageLength[3] + self.Length[3] -1) / self.Length[3]
         self.tilesPerImage = self.tilesAcross * self.tilesDown
         self.tileWidth = self.Width[3]
         self.tileLength = self.Length[3]
@@ -156,9 +156,12 @@ class Tile(object):
         scanline = 0
         
         while scanline < self.len:
-            data = array('h')
+            #data = array('h')
+            data = array('l')
             data.read(self.f, self.wid)
             self.data.append(data)
+            print self.data
+            exit()
             scanline += 1
         self.f.seek(cur)
         
@@ -236,7 +239,7 @@ class Tile(object):
         #Note do i need this? need to actually use this function...
         self._set_x_y_factor()        
         self.xFactor = -1
-        self.yFactor = -1
+        self.yFactor = 1
         
         for scanline in self.cartCoords:
             if scanline:
@@ -275,51 +278,51 @@ def gettileoffsets(f, obj):
     f.seek(cur)
     return offsets.tolist()
     
-def gettile(f,tileLength, tileWidth, offset):
-    '''
-    returns a 2d array of int values representing a tile
-    '''
-    cur = f.tell()
-    f.seek(offset)
-    scanline = 0
-    tile = []
-    while scanline < tileLength:
-        data = array('h')
-        #read to the right
-        data.read(f, tileWidth)
-        tile.append(data)
-        scanline += 1
-    f.seek(cur)
-    return tile
-
-def leftzeroindex(_list):
-    '''
-    find the leftmost position of valid pixels
-    returns None if all values in _list are 0
-    '''
-    index = 0
-    for pixel in _list:
-        if pixel != 0:
-            return index
-        else:
-            index += 1
-
-def rightzeroindex(_list):
-    '''
-    finds the right most position of valid pixels
-    returns None if all values in _list are 0
-    '''
-    index = len(_list) - 1
-    while index > 0:
-        if _list[index] != 0:
-            return index
-        else:
-            index -= 1
-
-def maketilearray(tilesPerImage,tilesDown,tilesAcross):
-    '''
-    create a 2d array representing the tiles
-    returns a numpy array
-    '''
-    return numpy.arange(tilesPerImage).reshape(tilesDown, tilesAcross)
-        
+# def gettile(f,tileLength, tileWidth, offset):
+#     '''
+#     returns a 2d array of int values representing a tile
+#     '''
+#     cur = f.tell()
+#     f.seek(offset)
+#     scanline = 0
+#     tile = []
+#     while scanline < tileLength:
+#         data = array('h')
+#         #read to the right
+#         data.read(f, tileWidth)
+#         tile.append(data)
+#         scanline += 1
+#     f.seek(cur)
+#     return tile
+# 
+# def leftzeroindex(_list):
+#     '''
+#     find the leftmost position of valid pixels
+#     returns None if all values in _list are 0
+#     '''
+#     index = 0
+#     for pixel in _list:
+#         if pixel != 0:
+#             return index
+#         else:
+#             index += 1
+# 
+# def rightzeroindex(_list):
+#     '''
+#     finds the right most position of valid pixels
+#     returns None if all values in _list are 0
+#     '''
+#     index = len(_list) - 1
+#     while index > 0:
+#         if _list[index] != 0:
+#             return index
+#         else:
+#             index -= 1
+# 
+# def maketilearray(tilesPerImage,tilesDown,tilesAcross):
+#     '''
+#     create a 2d array representing the tiles
+#     returns a numpy array
+#     '''
+#     return numpy.arange(tilesPerImage).reshape(tilesDown, tilesAcross)
+#         
